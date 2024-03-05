@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://6vv1wkandp55"]
+
+[ext_resource type="Script" path="res://scenes/characters/enemy.gd" id="1_wxu8n"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k5u40"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_1w3nx"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Enemy" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_wxu8n")
+
+[node name="Body" type="AnimatedSprite2D" parent="."]
+
+[node name="LeftHand" type="Sprite2D" parent="Body"]
+
+[node name="LeftWeapon" type="Node2D" parent="Body/LeftHand"]
+
+[node name="RightHand" type="Sprite2D" parent="Body"]
+
+[node name="RightWeapon" type="Node2D" parent="Body/RightHand"]
+
+[node name="HitArea" type="Area2D" parent="Body"]
+
+[node name="HitBox" type="CollisionShape2D" parent="Body/HitArea"]
+
+[node name="HurtArea" type="Area2D" parent="Body"]
+
+[node name="HurtBox" type="CollisionShape2D" parent="Body/HurtArea"]
+
+[node name="WeaponSlash" type="Sprite2D" parent="Body"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_right = 4.0
+offset_bottom = 27.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_k5u40")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_1w3nx")
